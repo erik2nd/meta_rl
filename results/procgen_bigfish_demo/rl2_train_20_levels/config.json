@@ -1,0 +1,11 @@
+{
+  "method": "rl2",
+  "env_name": "bigfish",
+  "num_train_levels": 20,
+  "total_steps": 100000,
+  "trials_per_iter": 4,
+  "episodes_per_trial": 3,
+  "lr": 0.0005,
+  "seed": 0,
+  "final_steps": 100285
+}

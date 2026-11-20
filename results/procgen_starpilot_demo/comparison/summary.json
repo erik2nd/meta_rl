@@ -1,0 +1,30 @@
+{
+  "game": "starpilot",
+  "train_level_for_ppo": 55,
+  "test_level": 150,
+  "num_train_levels_for_meta": 20,
+  "ppo": {
+    "train_level_return": 14.0,
+    "test_return_mean": 5.0,
+    "test_return_std": 3.63318042491699,
+    "training_steps": 299648
+  },
+  "rl2": {
+    "returns_per_episode": [
+      1.0,
+      0.0,
+      1.0,
+      2.0
+    ],
+    "first_episode_return": 1.0,
+    "last_episode_return": 2.0,
+    "adaptation_gain": 1.0,
+    "training_steps": 95062
+  },
+  "maml": {
+    "pre_adapt_return": 2.0,
+    "post_adapt_return": 2.0,
+    "adaptation_gain": 0.0,
+    "training_steps": 299776
+  }
+}

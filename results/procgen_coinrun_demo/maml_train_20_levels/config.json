@@ -1,0 +1,11 @@
+{
+  "method": "maml_fomaml",
+  "env_name": "coinrun",
+  "num_train_levels": 20,
+  "total_steps": 300000,
+  "inner_lr": 0.05,
+  "outer_lr": 0.0003,
+  "inner_steps": 1,
+  "seed": 0,
+  "final_steps": 300032
+}

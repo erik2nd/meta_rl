@@ -1,0 +1,10 @@
+{
+  "method": "ppo_baseline",
+  "env_name": "heist",
+  "level_seed": 55,
+  "total_steps": 300000,
+  "rollout_steps": 128,
+  "lr": 0.0005,
+  "seed": 0,
+  "final_steps": 300032
+}

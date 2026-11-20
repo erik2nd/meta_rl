@@ -1,0 +1,15 @@
+{
+  "game": "coinrun",
+  "train_level_for_ppo": 42,
+  "test_level": 555,
+  "num_train_levels_for_meta": 5,
+  "ppo": {
+    "train_level_return": 10.0,
+    "test_return_mean": 4.0,
+    "test_return_std": 4.898979485566356,
+    "training_steps": 19328
+  },
+  "rl2": null,
+  "pearl": null,
+  "maml": null
+}

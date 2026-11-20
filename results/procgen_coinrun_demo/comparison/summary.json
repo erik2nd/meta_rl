@@ -1,0 +1,12 @@
+{
+  "game": "coinrun",
+  "train_level_for_ppo": 55,
+  "test_level": 555,
+  "num_train_levels_for_meta": 30,
+  "maml": {
+    "pre_adapt_return": 0.0,
+    "post_adapt_return": 0.0,
+    "adaptation_gain": 0.0,
+    "training_steps": 299776
+  }
+}

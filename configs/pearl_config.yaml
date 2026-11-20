@@ -1,0 +1,66 @@
+# PEARL configuration for Meta-RL experiments
+# Reference: Rakelly et al., "Efficient Off-Policy Meta-RL via
+# Probabilistic Context Variables", ICML 2019. arXiv:1903.08254
+
+experiment:
+  name: "pearl_ml1_reach"
+  seed: 42
+  device: "cuda"
+  log_dir: "./logs"
+  save_dir: "./results"
+
+env:
+  benchmark: "ML1"
+  task_name: "reach-v3"
+  max_episode_steps: 150
+
+policy:
+  hidden_sizes: [256, 256]
+  activation: "relu"
+  init_log_std: -0.5
+
+critic:
+  # Twin Q-networks (SAC)
+  hidden_sizes: [256, 256]
+  activation: "relu"
+
+encoder:
+  # Context encoder q_phi(z | c), c = (s, a, r, s') transitions
+  latent_dim: 5              # dimension of z (task embedding)
+  hidden_sizes: [200, 200, 200]
+  activation: "relu"
+  # Encoder is permutation-invariant: aggregates per-transition embeddings
+  # by multiplying Gaussian factors (product of experts).
+
+pearl:
+  gamma: 0.99
+  tau: 0.005                 # soft target update coefficient
+  alpha: 0.2                 # SAC entropy temperature (fixed for simplicity)
+  kl_lambda: 0.1             # weight on KL(q_phi(z|c) || N(0, I))
+  context_batch_size: 100    # how many transitions to sample for context
+  rl_batch_size: 256         # SAC minibatch size
+
+training:
+  total_meta_iterations: 500
+  num_train_tasks: 50        # how many train tasks to keep buffers for
+  num_test_tasks: 10
+  num_initial_steps: 2000    # warm-up rollouts per task before training starts
+  num_steps_prior: 400       # steps with z ~ prior per iteration
+  num_steps_posterior: 400   # steps with z ~ posterior per iteration
+  num_extra_rl_steps: 400    # extra steps sampled from buffer for SAC
+  num_train_steps_per_iter: 2000  # SAC gradient updates per meta-iter
+  meta_batch_size: 16        # tasks sampled per meta-iter
+  eval_every_n_iterations: 10
+  num_eval_trajectories: 5   # trajectories per test task during eval
+
+optim:
+  policy_lr: 0.0003
+  qf_lr: 0.0003
+  encoder_lr: 0.0003
+  max_grad_norm: 1.0
+
+logging:
+  use_wandb: false
+  wandb_project: "meta-rl-thesis"
+  log_every: 1
+  save_every: 50

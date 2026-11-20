@@ -1,0 +1,28 @@
+# Core
+torch>=2.0.0
+numpy>=1.24.0
+scipy>=1.10.0
+
+# RL environments
+gymnasium>=0.29.0
+metaworld @ git+https://github.com/Farama-Foundation/Metaworld.git@master
+
+# Meta-learning
+learn2learn>=0.2.0
+
+# Utilities
+pyyaml>=6.0
+tqdm>=4.65.0
+
+# Logging & visualization
+wandb>=0.15.0
+tensorboard>=2.13.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+pandas>=2.0.0
+
+# Video recording (optional)
+imageio>=2.30.0
+imageio-ffmpeg>=0.4.8
+
+learn2learn~=0.2.0

@@ -1,0 +1,7 @@
+{
+  "game": "jumper",
+  "train_level_for_ppo": 15,
+  "test_level": 555,
+  "num_train_levels_for_meta": 20,
+  "ppo": null
+}

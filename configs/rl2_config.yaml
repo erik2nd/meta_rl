@@ -1,0 +1,52 @@
+# RL^2 configuration for Meta-RL experiments
+
+experiment:
+  name: "rl2_ml1_reach"
+  seed: 42
+  device: "cuda"
+  log_dir: "./logs"
+  save_dir: "./results"
+
+env:
+  benchmark: "ML1"
+  task_name: "reach-v3"
+  max_episode_steps: 150
+
+policy:
+  # GRU recurrent policy
+  hidden_size: 128            # GRU hidden size
+  feature_size: 64            # MLP feature embedding before GRU
+  activation: "tanh"
+  init_log_std: -0.5
+
+rl2:
+  # Meta-episode = num_episodes_per_trial sequential episodes in one task.
+  # The hidden state is preserved across episodes within a trial, reset between trials.
+  num_episodes_per_trial: 2   # K — number of episodes per task before switching
+  gamma: 0.99
+  gae_lambda: 0.95
+
+ppo:
+  # Outer loop is just PPO over meta-episodes
+  clip_eps: 0.2
+  vf_coef: 0.5
+  ent_coef: 0.01
+  lr: 0.0003
+  num_epochs: 4               # PPO epochs per update
+  minibatch_size: 64
+  max_grad_norm: 1.0
+
+training:
+#  total_meta_iterations: 300
+#  trials_per_iteration: 16    # how many tasks per meta-iteration
+#  eval_every_n_iterations: 10
+  total_meta_iterations: 5
+  trials_per_iteration: 4    # how many tasks per meta-iteration
+  eval_every_n_iterations: 3
+  num_eval_tasks: 10
+
+logging:
+  use_wandb: false
+  wandb_project: "meta-rl-thesis"
+  log_every: 1
+  save_every: 50

@@ -1,0 +1,42 @@
+# MAML configuration for Meta-RL experiments
+
+experiment:
+  name: "maml_ml1_reach"
+  seed: 42
+  device: "cuda"  # "cuda" or "cpu"
+  log_dir: "./logs"
+  save_dir: "./results"
+
+env:
+  benchmark: "ML1"           # ML1, ML10, ML45
+  task_name: "reach-v3"      # дл€ ML1: им€ задачи
+  max_episode_steps: 150     # длина эпизода в Meta-World
+  obs_dim: null              # будет определено автоматически
+  action_dim: null
+
+policy:
+  hidden_sizes: [128, 128]
+  activation: "tanh"
+  init_log_std: -0.5         # начальное лог-стд дл€ гауссовской политики
+
+maml:
+  inner_lr: 0.05             # alpha Ч learning rate внутреннего цикла
+  outer_lr: 0.0003           # beta Ч learning rate внешнего цикла
+  num_inner_steps: 1         # сколько градиентных шагов адаптации
+  first_order: false         # true = FOMAML (быстрее, но менее точно)
+  gamma: 0.99                # discount factor
+  gae_lambda: 0.95           # GAE lambda дл€ оценки преимуществ
+
+training:
+  total_meta_iterations: 50
+  tasks_per_meta_batch: 20   # сколько задач сэмплируем за одну мета-итерацию
+  trajectories_per_task: 10  # сколько траекторий собираем дл€ каждой задачи (на support set)
+  eval_trajectories_per_task: 10  # на query set (после адаптации)
+  eval_every_n_iterations: 10
+  num_eval_tasks: 10
+
+logging:
+  use_wandb: false           # включить wandb (требует api key)
+  wandb_project: "meta-rl"
+  log_every: 1               # каждые N мета-итераций
+  save_every: 50             # сохран€ть модель каждые N мета-итераций

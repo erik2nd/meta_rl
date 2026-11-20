@@ -1,0 +1,10 @@
+{
+  "method": "pearl",
+  "env_name": "starpilot",
+  "num_train_levels": 10,
+  "total_steps": 300000,
+  "latent_dim": 8,
+  "lr": 0.0003,
+  "seed": 0,
+  "final_steps": 300056
+}
